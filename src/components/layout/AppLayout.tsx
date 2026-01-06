@@ -1,0 +1,26 @@
+import { useState } from "react";
+import { AppSidebar } from "./AppSidebar";
+import { cn } from "@/lib/utils";
+
+interface AppLayoutProps {
+  children: React.ReactNode;
+}
+
+export function AppLayout({ children }: AppLayoutProps) {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <AppSidebar 
+        collapsed={sidebarCollapsed} 
+        onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} 
+      />
+      <main className={cn(
+        "min-h-screen transition-all duration-300",
+        sidebarCollapsed ? "ml-20" : "ml-64"
+      )}>
+        {children}
+      </main>
+    </div>
+  );
+}
