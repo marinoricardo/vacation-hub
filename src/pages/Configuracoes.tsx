@@ -97,7 +97,7 @@ export default function Configuracoes() {
                   <Label>Telefone</Label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input defaultValue="+351 912 345 678" className="h-11 pl-9 input-focus" />
+                    <Input defaultValue="+258 84 123 4567" className="h-11 pl-9 input-focus" />
                   </div>
                 </div>
                 <div className="space-y-2">

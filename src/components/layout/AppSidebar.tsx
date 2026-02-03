@@ -19,7 +19,7 @@ interface AppSidebarProps {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Minhas Férias", href: "/ferias", icon: PalmtreeIcon },
   { name: "Calendário", href: "/calendario", icon: CalendarDays },
   { name: "Histórico", href: "/historico", icon: Clock },
