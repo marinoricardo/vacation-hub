@@ -1,5 +1,6 @@
-import { PalmtreeIcon, CalendarPlus, FileText, Users } from "lucide-react";
+import { PalmtreeIcon, CalendarPlus, FileText, Users, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const actions = [
   {
@@ -36,19 +37,26 @@ export function QuickActions() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {actions.map((action) => (
-        <button
+        <Link
           key={action.title}
-          className="group p-4 bg-card rounded-xl border shadow-card hover:shadow-card-hover transition-all text-left"
+          to={action.href}
+          aria-label={action.title}
+          className="group p-4 bg-card rounded-xl border shadow-sm hover:shadow-md transition-all text-left flex flex-col justify-between"
         >
-          <div className={cn(
-            "w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110",
-            action.color
-          )}>
-            <action.icon className="w-6 h-6" />
+          <div>
+            <div className={cn(
+              "w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-105",
+              action.color
+            )}>
+              <action.icon className="w-6 h-6" />
+            </div>
+            <h4 className="font-semibold text-foreground">{action.title}</h4>
+            <p className="text-sm text-muted-foreground mt-0.5">{action.description}</p>
           </div>
-          <h4 className="font-semibold text-foreground">{action.title}</h4>
-          <p className="text-sm text-muted-foreground mt-0.5">{action.description}</p>
-        </button>
+          <div className="mt-4 text-muted-foreground group-hover:text-foreground transition">
+            <ChevronRight className="w-4 h-4" />
+          </div>
+        </Link>
       ))}
     </div>
   );

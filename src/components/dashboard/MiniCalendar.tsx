@@ -18,11 +18,11 @@ export function MiniCalendar() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-display font-semibold text-foreground">Janeiro 2025</h3>
-        <div className="flex items-center gap-1">
-          <button className="p-1.5 rounded-lg hover:bg-muted transition-colors">
+        <div className="flex items-center gap-2">
+          <button className="p-1.5 rounded-lg hover:bg-muted transition-colors" aria-label="Mês anterior">
             <ChevronLeft className="w-4 h-4 text-muted-foreground" />
           </button>
-          <button className="p-1.5 rounded-lg hover:bg-muted transition-colors">
+          <button className="p-1.5 rounded-lg hover:bg-muted transition-colors" aria-label="Próximo mês">
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </button>
         </div>
@@ -38,20 +38,20 @@ export function MiniCalendar() {
       </div>
 
       {/* Calendar days */}
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-2">
         {calendarData.map((item, i) => (
           <div
             key={i}
             className={cn(
-              "calendar-day",
-              item.day && "hover:bg-muted cursor-pointer",
-              item.type === "today" && "calendar-day-today",
-              item.type === "vacation" && "calendar-day-vacation",
-              item.type === "pending" && "calendar-day-pending",
-              !item.day && "text-transparent"
+              "h-9 flex items-center justify-center rounded-md text-sm",
+              !item.day && "text-transparent",
+              item.type === "today" && "bg-primary text-white font-semibold",
+              item.type === "vacation" && "bg-success/10 text-success font-medium",
+              item.type === "pending" && "bg-pending/10 text-pending font-medium",
+              item.day && "hover:bg-muted/10 cursor-pointer transition"
             )}
           >
-            {item.day || "0"}
+            {item.day || ""}
           </div>
         ))}
       </div>

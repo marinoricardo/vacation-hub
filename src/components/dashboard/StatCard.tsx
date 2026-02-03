@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ChevronUp, ChevronDown } from "lucide-react";
 
 interface StatCardProps {
   title: string;
@@ -14,19 +14,19 @@ interface StatCardProps {
 }
 
 const variantStyles = {
-  default: "bg-card",
-  primary: "bg-gradient-primary text-white",
-  success: "bg-success-light border-success/20",
-  warning: "bg-warning-light border-warning/20",
-  pending: "bg-pending-light border-pending/20",
+  default: "bg-card border",
+  primary: "bg-primary text-white border-transparent",
+  success: "bg-success/5 border border-success/10",
+  warning: "bg-warning/5 border border-warning/10",
+  pending: "bg-muted/5 border border-muted/10",
 };
 
 const iconVariantStyles = {
-  default: "bg-muted text-foreground",
-  primary: "bg-white/20 text-white",
+  default: "bg-muted/10 text-foreground",
+  primary: "bg-white/10 text-white",
   success: "bg-success/10 text-success",
   warning: "bg-warning/10 text-warning",
-  pending: "bg-pending/10 text-pending",
+  pending: "bg-muted/10 text-muted-foreground",
 };
 
 export function StatCard({ 
@@ -39,15 +39,14 @@ export function StatCard({
 }: StatCardProps) {
   return (
     <div className={cn(
-      "rounded-xl border p-6 transition-all hover:shadow-card-hover",
-      variantStyles[variant],
-      variant === "default" && "shadow-card"
+      "rounded-xl p-6 transition-all hover:shadow-card-hover hover:-translate-y-0.5",
+      variantStyles[variant]
     )}>
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between gap-4">
         <div className="space-y-2">
           <p className={cn(
             "text-sm font-medium",
-            variant === "primary" ? "text-white/80" : "text-muted-foreground"
+            variant === "primary" ? "text-white/90" : "text-muted-foreground"
           )}>
             {title}
           </p>
@@ -65,20 +64,23 @@ export function StatCard({
               {subtitle}
             </p>
           )}
+
           {trend && (
-            <div className={cn(
-              "flex items-center gap-1 text-sm font-medium",
-              trend.positive ? "text-success" : "text-destructive"
-            )}>
-              <span>{trend.positive ? "+" : ""}{trend.value}%</span>
-              <span className={cn(
-                variant === "primary" ? "text-white/60" : "text-muted-foreground"
-              )}>vs mês anterior</span>
+            <div className="mt-2 inline-flex items-center gap-2">
+              <div className={cn(
+                "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-sm font-medium",
+                trend.positive ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"
+              )}>
+                {trend.positive ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                <span>{trend.positive ? "+" : ""}{trend.value}%</span>
+              </div>
+              <span className="text-xs text-muted-foreground">vs mês anterior</span>
             </div>
           )}
         </div>
+
         <div className={cn(
-          "p-3 rounded-xl",
+          "p-3 rounded-xl flex items-center justify-center w-12 h-12",
           iconVariantStyles[variant]
         )}>
           <Icon className="w-6 h-6" />

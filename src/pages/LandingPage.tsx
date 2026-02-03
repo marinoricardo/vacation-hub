@@ -145,10 +145,10 @@ const LandingPage = () => {
           
           <div className="flex items-center gap-3">
             <Link to="/login">
-              <Button variant="ghost" size="sm">Entrar</Button>
+              <Button variant="ghost" size="sm" className="text-foreground/80 hover:text-foreground">Entrar</Button>
             </Link>
             <Link to="/criar-conta">
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
+              <Button size="sm" className="bg-primary text-white shadow-sm hover:bg-primary/95 transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50">
                 Começar Grátis
               </Button>
             </Link>
@@ -162,38 +162,67 @@ const LandingPage = () => {
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
         
-        <div className="container mx-auto text-center relative z-10">
-          <Badge variant="secondary" className="mb-6 px-4 py-1.5">
-            🇲🇿 Feito para empresas moçambicanas
-          </Badge>
-          
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight mb-6">
-            Gestão de Férias{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              Simples e Moderna
-            </span>{" "}
-            para a sua Empresa
-          </h1>
-          
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            Automatize pedidos, aprovações e acompanhamento de férias. 
-            Menos burocracia, mais produtividade para a sua equipa em Moçambique.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link to="/criar-conta">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 h-14">
-                Experimentar 14 Dias Grátis
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Button size="lg" variant="outline" className="text-lg px-8 h-14">
-              Ver Demonstração
-            </Button>
+        <div className="container mx-auto relative z-10">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
+            <div className="w-full lg:w-1/2 text-center lg:text-left">
+              <Badge variant="hero" className="mb-6 inline-flex items-center">
+                <Building2 className="w-4 h-4 mr-2 text-primary" />
+                Feito para empresas moçambicanas
+              </Badge>
+
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-2xl leading-tight mb-4">
+                Gestão de Férias{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                  Simples e Moderna
+                </span>{" "}
+                para a sua Empresa
+              </h1>
+
+              <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-6">
+                Automatize pedidos, aprovações e acompanhamento de férias. Menos burocracia, mais produtividade para a sua equipa em Moçambique.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
+                <Link to="/criar-conta">
+                  <Button size="lg" className="bg-primary text-white text-lg px-8 h-14 shadow-lg hover:bg-primary/95 transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50">
+                    Experimentar 14 Dias Grátis
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <Button size="lg" variant="outline" className="text-lg px-8 h-14 border border-border text-foreground hover:bg-muted/5 transition">
+                  Ver Demonstração
+                </Button> 
+              </div>
+
+              <div className="flex items-center gap-6 justify-center lg:justify-start text-sm text-muted-foreground">
+                <div className="inline-flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary" /> Sem cartão de crédito</div>
+                <div className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-primary" /> 14 dias grátis</div>
+                <div className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-primary" /> Segurança e conformidade</div>
+              </div>
+            </div>
+
+            <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+              <div className="w-[420px] rounded-2xl p-6 bg-card/70 border border-border shadow-xl">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="font-semibold">Abril 2026</div>
+                  <div className="text-sm text-muted-foreground">2 ausências esta semana</div>
+                </div>
+                <div className="grid grid-cols-7 gap-2 text-sm">
+                  {[...Array(28)].map((_, i) => (
+                    <div key={i} className={`h-8 flex items-center justify-center rounded ${i % 7 === 0 ? 'text-primary' : 'text-muted-foreground'} ${i===10 || i===11 ? 'bg-primary/10 font-semibold' : ''}`}>{(i % 7) + 1}</div>
+                  ))}
+                </div>
+                <div className="mt-4 flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">MS</div>
+                  <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-semibold">JT</div>
+                  <div className="text-sm text-muted-foreground">Solicitações e aprovações em tempo real</div>
+                </div>
+              </div>
+            </div>
           </div>
-          
+
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto mt-10">
             {[
               { value: "500+", label: "Empresas" },
               { value: "25.000+", label: "Colaboradores" },
@@ -224,10 +253,10 @@ const LandingPage = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <Card key={index} className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Card key={index} className="border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-primary" />
+                  <div className="w-14 h-14 rounded-xl mb-4 flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
+                    <feature.icon className="w-7 h-7 text-primary" />
                   </div>
                   <CardTitle className="text-lg">{feature.title}</CardTitle>
                 </CardHeader>
@@ -302,11 +331,11 @@ const LandingPage = () => {
             {plans.map((plan, index) => (
               <Card 
                 key={index} 
-                className={`relative border-border/50 ${plan.popular ? 'border-primary shadow-xl scale-105 bg-card' : 'bg-card/50'}`}
+                className={`relative border-border/50 ${plan.popular ? 'border-primary shadow-2xl scale-105 bg-card' : 'bg-card/50'}`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground">Mais Popular</Badge>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <Badge variant="hero" className="px-3 py-1 text-sm">Mais Popular</Badge>
                   </div>
                 )}
                 <CardHeader className="text-center pb-2">
@@ -315,6 +344,7 @@ const LandingPage = () => {
                   <div className="pt-4">
                     <span className="text-4xl font-display font-bold text-foreground">{plan.price}</span>
                     <span className="text-muted-foreground"> {plan.currency}{plan.period}</span>
+                    <div className="text-xs text-muted-foreground mt-1">Facturação mensal • Cancelamento fácil</div>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-6">
@@ -327,11 +357,11 @@ const LandingPage = () => {
                     ))}
                   </ul>
                   <Button 
-                    className={`w-full ${plan.popular ? 'bg-primary hover:bg-primary/90' : ''}`}
+                    className={`w-full ${plan.popular ? 'bg-primary text-white shadow-md hover:bg-primary/95 transform hover:-translate-y-0.5' : 'border border-border hover:bg-muted/5'}`}
                     variant={plan.popular ? "default" : "outline"}
                   >
                     Começar Agora
-                  </Button>
+                  </Button> 
                 </CardContent>
               </Card>
             ))}
@@ -358,14 +388,16 @@ const LandingPage = () => {
           
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-border/50 bg-card/50">
+              <Card key={index} className="border-border/50 bg-card/50 shadow-md">
                 <CardContent className="pt-6">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
+                  <div className="text-amber-400 mb-4">
+                    <Star className="w-5 h-5 inline mr-1 fill-amber-400 text-amber-400" />
+                    <Star className="w-5 h-5 inline mr-1 fill-amber-400 text-amber-400" />
+                    <Star className="w-5 h-5 inline mr-1 fill-amber-400 text-amber-400" />
+                    <Star className="w-5 h-5 inline mr-1 fill-amber-400 text-amber-400" />
+                    <Star className="w-5 h-5 inline fill-amber-400 text-amber-400" />
                   </div>
-                  <p className="text-muted-foreground mb-6 italic">"{testimonial.content}"</p>
+                  <blockquote className="text-muted-foreground mb-6 italic text-sm">“{testimonial.content}”</blockquote>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold text-sm">
                       {testimonial.avatar}
@@ -389,18 +421,24 @@ const LandingPage = () => {
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOCAxOC04LjA1OSAxOC0xOC04LjA1OS0xOC0xOC0xOHoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-30" />
             
             <div className="relative z-10">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-3">
                 Pronto para modernizar a gestão de férias?
               </h2>
-              <p className="text-white/80 max-w-xl mx-auto mb-8">
-                Junte-se a centenas de empresas moçambicanas que já simplificaram os seus processos de RH.
+              <p className="text-white/90 max-w-xl mx-auto mb-4">
+                Junte-se a centenas de empresas moçambicanas que já simplificaram os seus processos de RH. Experimente sem riscos por 14 dias.
               </p>
-              <Link to="/criar-conta">
-                <Button size="lg" variant="secondary" className="text-lg px-8 h-14">
-                  Criar Conta Gratuita
-                  <ArrowRight className="ml-2 w-5 h-5" />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/criar-conta">
+                  <Button size="lg" className="bg-accent text-white text-lg px-8 h-14 shadow-lg hover:bg-accent/95 transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent/50">
+                    Criar Conta Gratuita
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <Button size="lg" variant="outline" className="text-lg px-8 h-14 text-white/90 border-white/30 hover:bg-white/5 transition">
+                  Fale com Vendas
                 </Button>
-              </Link>
+              </div>
+              <div className="text-xs text-white/70 mt-4">Suporte local • Dados seguros • Cancelamento rápido</div>
             </div>
           </div>
         </div>
@@ -454,7 +492,7 @@ const LandingPage = () => {
           
           <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2024 VacaFlow. Todos os direitos reservados. 🇲🇿 Feito em Moçambique
+              © { new Date().getFullYear() } VacaFlow. Design by Marino Ricardo.  Todos os direitos reservados. 
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">

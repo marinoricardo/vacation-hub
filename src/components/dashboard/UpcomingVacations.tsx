@@ -1,5 +1,6 @@
 import { CalendarDays, ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const upcomingVacations = [
   {
@@ -67,12 +68,12 @@ export function UpcomingVacations() {
         {upcomingVacations.map((vacation) => (
           <div 
             key={vacation.id} 
-            className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors"
+            className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors gap-4"
           >
             <div className="flex items-center gap-3">
               <Avatar className="w-10 h-10">
                 <AvatarImage src={vacation.avatar} />
-                <AvatarFallback className="bg-gradient-primary text-white text-sm font-medium">
+                <AvatarFallback className="bg-primary text-white text-sm font-medium">
                   {vacation.initials}
                 </AvatarFallback>
               </Avatar>
@@ -81,17 +82,13 @@ export function UpcomingVacations() {
                 <p className="text-sm text-muted-foreground">{vacation.department}</p>
               </div>
             </div>
-            <div className="text-right">
+            <div className="text-right flex flex-col items-end gap-2">
               <p className="font-medium text-foreground">{vacation.dates}</p>
-              <div className="flex items-center gap-2 justify-end mt-1">
-                <span className="text-sm text-muted-foreground">{vacation.days} dias</span>
-                <span className={
-                  vacation.status === "approved" 
-                    ? "badge-approved text-xs" 
-                    : "badge-pending text-xs"
-                }>
+              <div className="flex items-center gap-2">
+                <Badge className="text-xs">{vacation.days} dias</Badge>
+                <Badge variant={vacation.status === "approved" ? "secondary" : "destructive"} className="text-xs">
                   {vacation.status === "approved" ? "Aprovado" : "Pendente"}
-                </span>
+                </Badge>
               </div>
             </div>
           </div>

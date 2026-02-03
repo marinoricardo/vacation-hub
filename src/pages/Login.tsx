@@ -4,15 +4,28 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PalmtreeIcon, Mail, Lock, ArrowRight, Building2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { showLoadingThenSuccessRedirect } from "@/lib/alerts";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
+
+    try {
+      await showLoadingThenSuccessRedirect(
+        navigate,
+        "/dashboard",
+        { title: "Bem-vindo", text: "Sessão iniciada com sucesso!" },
+        1600
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
