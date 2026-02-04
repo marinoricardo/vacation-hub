@@ -6,12 +6,11 @@ import {
   PalmtreeIcon,
   Clock,
   FileText,
-  LogOut,
   ChevronLeft,
-  Bell
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { cn } from "@/lib/utils";
+import { UserMenu } from "@/components/user/UserMenu";
 
 interface AppSidebarProps {
   collapsed?: boolean;
@@ -113,29 +112,7 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
 
       {/* User Section */}
       <div className="p-3 border-t border-sidebar-border">
-        <div className={cn(
-          "flex items-center gap-3 p-3 rounded-lg hover:bg-sidebar-accent transition-colors cursor-pointer",
-          collapsed && "justify-center"
-        )}>
-          <div className="w-10 h-10 rounded-full bg-gradient-warm flex items-center justify-center text-white font-semibold text-sm">
-            MC
-          </div>
-          {!collapsed && (
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-sidebar-accent-foreground truncate">
-                Maria Costa
-              </p>
-              <p className="text-xs text-sidebar-foreground truncate">
-                Gestora de RH
-              </p>
-            </div>
-          )}
-          {!collapsed && (
-            <button className="p-2 hover:bg-sidebar-border rounded-lg transition-colors text-sidebar-foreground">
-              <LogOut className="w-4 h-4" />
-            </button>
-          )}
-        </div>
+        <UserMenu collapsed={collapsed} />
       </div>
     </aside>
   );
