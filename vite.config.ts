@@ -4,8 +4,6 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/vacation/",   // 👈 ISSO resolve o 404 dos assets
-
   server: {
     host: "::",
     port: 8080,
