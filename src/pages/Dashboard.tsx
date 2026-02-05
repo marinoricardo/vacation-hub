@@ -5,7 +5,6 @@ import { QuickActions } from "@/components/dashboard/QuickActions";
 import { UpcomingVacations } from "@/components/dashboard/UpcomingVacations";
 import { MiniCalendar } from "@/components/dashboard/MiniCalendar";
 import { TeamAvailability } from "@/components/dashboard/TeamAvailability";
-import { PalmtreeIcon, CalendarCheck, Clock, CalendarDays } from "lucide-react";
 
 // Charts
 import { ChartContainer, ChartTooltipContent, ChartLegend } from "@/components/ui/chart";
@@ -26,28 +25,24 @@ export default function Dashboard() {
             title="Dias Disponíveis"
             value="18"
             subtitle="de 22 dias anuais"
-            icon={PalmtreeIcon}
             variant="primary"
           />
           <StatCard
             title="Dias Usados"
             value="4"
             subtitle="em 2025"
-            icon={CalendarCheck}
             variant="success"
           />
           <StatCard
             title="Pedidos Pendentes"
             value="3"
             subtitle="aguardam aprovação"
-            icon={Clock}
             variant="pending"
           />
           <StatCard
             title="Próximas Férias"
             value="15 Jan"
             subtitle="8 dias marcados"
-            icon={CalendarDays}
             variant="default"
           />
         </div>

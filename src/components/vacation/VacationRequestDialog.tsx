@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { format, differenceInDays, addDays } from "date-fns";
+import { format, differenceInDays } from "date-fns";
 import { pt } from "date-fns/locale";
-import { Calendar as CalendarIcon, PalmtreeIcon, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -81,20 +81,12 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {trigger || (
-          <Button className="bg-gradient-primary hover:opacity-90 gap-2 shadow-md">
-            <PalmtreeIcon className="w-4 h-4" />
-            <span className="hidden sm:inline">Novo Pedido</span>
-          </Button>
+          <Button size="sm">Novo Pedido</Button>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <div className="p-2 rounded-lg bg-primary/10">
-              <PalmtreeIcon className="w-5 h-5 text-primary" />
-            </div>
-            Novo Pedido de Férias
-          </DialogTitle>
+          <DialogTitle>Novo Pedido de Férias</DialogTitle>
           <DialogDescription>
             Preenche os detalhes do teu pedido de ausência.
           </DialogDescription>
@@ -114,7 +106,6 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
                       !startDate && "text-muted-foreground"
                     )}
                   >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
                     {startDate ? (
                       format(startDate, "d MMM yyyy", { locale: pt })
                     ) : (
@@ -152,7 +143,6 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
                       !endDate && "text-muted-foreground"
                     )}
                   >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
                     {endDate ? (
                       format(endDate, "d MMM yyyy", { locale: pt })
                     ) : (
@@ -229,19 +219,15 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
             </Button>
             <Button
               type="submit"
-              className="bg-gradient-primary gap-2"
               disabled={isSubmitting || !startDate || !endDate}
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
                   A submeter...
                 </>
               ) : (
-                <>
-                  <PalmtreeIcon className="w-4 h-4" />
-                  Submeter Pedido
-                </>
+                "Submeter Pedido"
               )}
             </Button>
           </DialogFooter>

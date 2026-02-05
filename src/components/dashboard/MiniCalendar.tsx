@@ -1,9 +1,7 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
-// Mock calendar data
 const calendarData = [
   { day: null }, { day: null }, { day: 1 }, { day: 2 }, { day: 3 }, { day: 4 }, { day: 5 },
   { day: 6, type: "today" }, { day: 7 }, { day: 8 }, { day: 9 }, { day: 10 }, { day: 11 }, { day: 12 },
@@ -18,13 +16,9 @@ export function MiniCalendar() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-display font-semibold text-foreground">Janeiro 2025</h3>
-        <div className="flex items-center gap-2">
-          <button className="p-1.5 rounded-lg hover:bg-muted transition-colors" aria-label="Mês anterior">
-            <ChevronLeft className="w-4 h-4 text-muted-foreground" />
-          </button>
-          <button className="p-1.5 rounded-lg hover:bg-muted transition-colors" aria-label="Próximo mês">
-            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          </button>
+        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+          <button className="px-2 py-1 hover:bg-muted rounded transition-colors">←</button>
+          <button className="px-2 py-1 hover:bg-muted rounded transition-colors">→</button>
         </div>
       </div>
 
@@ -43,12 +37,12 @@ export function MiniCalendar() {
           <div
             key={i}
             className={cn(
-              "h-9 flex items-center justify-center rounded-md text-sm",
+              "h-9 flex items-center justify-center rounded-md text-sm transition-colors",
               !item.day && "text-transparent",
-              item.type === "today" && "bg-primary text-white font-semibold",
+              item.type === "today" && "bg-primary text-primary-foreground font-semibold",
               item.type === "vacation" && "bg-success/10 text-success font-medium",
-              item.type === "pending" && "bg-pending/10 text-pending font-medium",
-              item.day && "hover:bg-muted/10 cursor-pointer transition"
+              item.type === "pending" && "bg-muted text-muted-foreground font-medium",
+              item.day && !item.type && "hover:bg-muted/50 cursor-pointer"
             )}
           >
             {item.day || ""}
@@ -56,20 +50,11 @@ export function MiniCalendar() {
         ))}
       </div>
 
-      {/* Legend */}
-      <div className="flex items-center gap-4 mt-6 pt-4 border-t">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-primary" />
-          <span className="text-xs text-muted-foreground">Hoje</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-success" />
-          <span className="text-xs text-muted-foreground">Férias</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-pending" />
-          <span className="text-xs text-muted-foreground">Pendente</span>
-        </div>
+      {/* Legend - simplified */}
+      <div className="flex items-center gap-6 mt-6 pt-4 border-t text-xs text-muted-foreground">
+        <span><span className="inline-block w-2 h-2 rounded-full bg-primary mr-1.5" />Hoje</span>
+        <span><span className="inline-block w-2 h-2 rounded-full bg-success mr-1.5" />Férias</span>
+        <span><span className="inline-block w-2 h-2 rounded-full bg-muted-foreground mr-1.5" />Pendente</span>
       </div>
     </div>
   );

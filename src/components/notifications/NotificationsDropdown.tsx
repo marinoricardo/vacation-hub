@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bell, Check, Clock, X, Trash2 } from "lucide-react";
+import { Bell, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -68,24 +68,13 @@ export function NotificationsDropdown() {
     toast.success("Notificação removida");
   };
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case "approval":
-        return <Check className="w-4 h-4 text-success" />;
-      case "warning":
-        return <Clock className="w-4 h-4 text-pending" />;
-      default:
-        return <Bell className="w-4 h-4 text-primary" />;
-    }
-  };
-
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
           <Bell className="w-5 h-5 text-muted-foreground" />
           {unreadCount > 0 && (
-            <span className="absolute top-1 right-1 w-4 h-4 bg-secondary text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+            <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
               {unreadCount}
             </span>
           )}
@@ -96,7 +85,7 @@ export function NotificationsDropdown() {
           <h3 className="font-semibold text-foreground">Notificações</h3>
           {unreadCount > 0 && (
             <Button variant="ghost" size="sm" onClick={markAllAsRead} className="text-xs h-7">
-              Marcar todas como lidas
+              Marcar como lidas
             </Button>
           )}
         </div>
@@ -104,7 +93,6 @@ export function NotificationsDropdown() {
         <div className="max-h-[320px] overflow-y-auto">
           {notifications.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground">
-              <Bell className="w-8 h-8 mx-auto mb-2 opacity-50" />
               <p className="text-sm">Sem notificações</p>
             </div>
           ) : (
@@ -117,16 +105,6 @@ export function NotificationsDropdown() {
                 )}
                 onClick={() => markAsRead(notification.id)}
               >
-                <div
-                  className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
-                    notification.type === "approval" && "bg-success/10",
-                    notification.type === "warning" && "bg-pending/10",
-                    notification.type === "info" && "bg-primary/10"
-                  )}
-                >
-                  {getTypeIcon(notification.type)}
-                </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
                     <p className="font-medium text-sm text-foreground truncate">
@@ -160,7 +138,7 @@ export function NotificationsDropdown() {
         <DropdownMenuSeparator />
         <div className="p-2">
           <Button variant="ghost" className="w-full text-sm" onClick={() => setOpen(false)}>
-            Ver todas as notificações
+            Ver todas
           </Button>
         </div>
       </DropdownMenuContent>

@@ -2,12 +2,12 @@ import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { Button } from "@/components/ui/button";
-import { PalmtreeIcon, Clock, CheckCircle2, XCircle, CalendarDays, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { VacationRequestDialog } from "@/components/vacation/VacationRequestDialog";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { Trash2 } from "lucide-react";
 
 const initialVacationHistory = [
   { id: 1, startDate: "15 Jan 2025", endDate: "22 Jan 2025", days: 8, status: "approved", type: "Férias" },
@@ -19,18 +19,15 @@ const initialVacationHistory = [
 const statusConfig = {
   approved: { 
     label: "Aprovado", 
-    icon: CheckCircle2, 
-    className: "bg-success-light text-success" 
+    className: "bg-success/10 text-success" 
   },
   pending: { 
     label: "Pendente", 
-    icon: Clock, 
-    className: "bg-pending-light text-pending" 
+    className: "bg-muted text-muted-foreground" 
   },
   rejected: { 
     label: "Rejeitado", 
-    icon: XCircle, 
-    className: "bg-destructive-light text-destructive" 
+    className: "bg-destructive/10 text-destructive" 
   },
 };
 
@@ -61,22 +58,17 @@ export default function Ferias() {
       />
       
       <div className="p-6 space-y-6 animate-fade-in">
-        {/* Balance Cards */}
+        {/* Balance Cards - Minimalist */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="bg-gradient-primary text-white rounded-xl p-6"
+            className="bg-primary text-primary-foreground rounded-xl p-6"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-white/20">
-                <PalmtreeIcon className="w-5 h-5" />
-              </div>
-              <span className="text-white/80 font-medium">Dias Disponíveis</span>
-            </div>
+            <p className="text-primary-foreground/80 text-sm font-medium mb-2">Dias Disponíveis</p>
             <p className="text-4xl font-display font-bold">18</p>
-            <p className="text-white/60 text-sm mt-1">de 22 dias anuais</p>
+            <p className="text-primary-foreground/60 text-sm mt-1">de 22 dias anuais</p>
           </motion.div>
           
           <motion.div 
@@ -85,12 +77,7 @@ export default function Ferias() {
             transition={{ duration: 0.3, delay: 0.1 }}
             className="bg-card rounded-xl border shadow-card p-6"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-success/10">
-                <CalendarDays className="w-5 h-5 text-success" />
-              </div>
-              <span className="text-muted-foreground font-medium">Dias Usados</span>
-            </div>
+            <p className="text-muted-foreground text-sm font-medium mb-2">Dias Usados</p>
             <p className="text-4xl font-display font-bold text-foreground">4</p>
             <p className="text-muted-foreground text-sm mt-1">em 2025</p>
           </motion.div>
@@ -101,18 +88,13 @@ export default function Ferias() {
             transition={{ duration: 0.3, delay: 0.2 }}
             className="bg-card rounded-xl border shadow-card p-6"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-pending/10">
-                <Clock className="w-5 h-5 text-pending" />
-              </div>
-              <span className="text-muted-foreground font-medium">Pendentes</span>
-            </div>
+            <p className="text-muted-foreground text-sm font-medium mb-2">Pendentes</p>
             <p className="text-4xl font-display font-bold text-foreground">2</p>
             <p className="text-muted-foreground text-sm mt-1">dias a aguardar</p>
           </motion.div>
         </div>
 
-        {/* New Request Section - Now with Dialog */}
+        {/* New Request Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,21 +102,13 @@ export default function Ferias() {
           className="bg-card rounded-xl border shadow-card overflow-hidden"
         >
           <div className="flex items-center justify-between p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <PalmtreeIcon className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-display font-semibold text-foreground">Novo Pedido de Férias</h3>
-                <p className="text-sm text-muted-foreground">Submeter um novo pedido</p>
-              </div>
+            <div>
+              <h3 className="font-display font-semibold text-foreground">Novo Pedido de Férias</h3>
+              <p className="text-sm text-muted-foreground">Submeter um novo pedido</p>
             </div>
             <VacationRequestDialog 
               trigger={
-                <Button className="bg-gradient-primary gap-2">
-                  <PalmtreeIcon className="w-4 h-4" />
-                  Pedir Férias
-                </Button>
+                <Button>Pedir Férias</Button>
               }
             />
           </div>
@@ -165,28 +139,22 @@ export default function Ferias() {
                     transition={{ duration: 0.2, delay: index * 0.05 }}
                     className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-muted/30 transition-colors gap-4 group"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-muted/50 flex items-center justify-center">
-                        <PalmtreeIcon className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          {item.startDate} - {item.endDate}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {item.type} • {item.days} {item.days === 1 ? "dia" : "dias"}
-                        </p>
-                      </div>
+                    <div>
+                      <p className="font-medium text-foreground">
+                        {item.startDate} - {item.endDate}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.type} · {item.days} {item.days === 1 ? "dia" : "dias"}
+                      </p>
                     </div>
                     
                     <div className="flex items-center gap-3">
-                      <div className={cn(
-                        "flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium",
+                      <span className={cn(
+                        "px-3 py-1 rounded-full text-sm font-medium",
                         status.className
                       )}>
-                        <status.icon className="w-4 h-4" />
                         {status.label}
-                      </div>
+                      </span>
                       
                       {item.status === "pending" && (
                         <Button
