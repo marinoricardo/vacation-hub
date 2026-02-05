@@ -1,13 +1,4 @@
-import { 
-  LayoutDashboard, 
-  CalendarDays, 
-  Users, 
-  Settings, 
-  PalmtreeIcon,
-  Clock,
-  FileText,
-  ChevronLeft,
-} from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { cn } from "@/lib/utils";
 import { UserMenu } from "@/components/user/UserMenu";
@@ -18,16 +9,16 @@ interface AppSidebarProps {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Minhas Férias", href: "/ferias", icon: PalmtreeIcon },
-  { name: "Calendário", href: "/calendario", icon: CalendarDays },
-  { name: "Histórico", href: "/historico", icon: Clock },
-  { name: "Pedidos", href: "/pedidos", icon: FileText },
+  { name: "Dashboard", href: "/dashboard" },
+  { name: "Minhas Férias", href: "/ferias" },
+  { name: "Calendário", href: "/calendario" },
+  { name: "Histórico", href: "/historico" },
+  { name: "Pedidos", href: "/pedidos" },
 ];
 
 const adminNavigation = [
-  { name: "Equipa", href: "/equipa", icon: Users },
-  { name: "Configurações", href: "/configuracoes", icon: Settings },
+  { name: "Equipa", href: "/equipa" },
+  { name: "Configurações", href: "/configuracoes" },
 ];
 
 export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
@@ -39,8 +30,8 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
       {/* Logo */}
       <div className="flex items-center justify-between h-16 px-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center">
-            <PalmtreeIcon className="w-6 h-6 text-white" />
+          <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-lg">V</span>
           </div>
           {!collapsed && (
             <span className="font-display font-bold text-xl text-sidebar-accent-foreground">
@@ -64,7 +55,7 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
         <div className="space-y-1">
           {!collapsed && (
             <span className="px-3 text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider">
-              Menu Principal
+              Menu
             </span>
           )}
           <div className="mt-2 space-y-1">
@@ -73,13 +64,16 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all group",
+                  "flex items-center px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all",
                   collapsed && "justify-center"
                 )}
                 activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
               >
-                <item.icon className="w-5 h-5 flex-shrink-0" />
-                {!collapsed && <span>{item.name}</span>}
+                {collapsed ? (
+                  <span className="text-sm font-medium">{item.name.charAt(0)}</span>
+                ) : (
+                  <span>{item.name}</span>
+                )}
               </NavLink>
             ))}
           </div>
@@ -88,7 +82,7 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
         <div className="pt-6 space-y-1">
           {!collapsed && (
             <span className="px-3 text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider">
-              Administração
+              Admin
             </span>
           )}
           <div className="mt-2 space-y-1">
@@ -97,13 +91,16 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all",
+                  "flex items-center px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all",
                   collapsed && "justify-center"
                 )}
                 activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
               >
-                <item.icon className="w-5 h-5 flex-shrink-0" />
-                {!collapsed && <span>{item.name}</span>}
+                {collapsed ? (
+                  <span className="text-sm font-medium">{item.name.charAt(0)}</span>
+                ) : (
+                  <span>{item.name}</span>
+                )}
               </NavLink>
             ))}
           </div>

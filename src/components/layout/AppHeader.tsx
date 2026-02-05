@@ -1,9 +1,9 @@
-import { Bell, Search, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { NotificationsDropdown } from "@/components/notifications/NotificationsDropdown";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { VacationRequestDialog } from "@/components/vacation/VacationRequestDialog";
+import { Button } from "@/components/ui/button";
 
 interface AppHeaderProps {
   title: string;
@@ -23,29 +23,30 @@ export function AppHeader({ title, subtitle }: AppHeaderProps) {
         </div>
 
         {/* Right - Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {/* Search */}
           <div className="relative hidden md:block">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder="Pesquisar..."
-              className="pl-9 w-64 bg-muted/50 border-0 focus:bg-background focus:ring-2 focus:ring-primary/20"
+              className="pl-9 w-56 bg-muted/50 border-0 focus:bg-background focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
           {/* New Request Button */}
-          <VacationRequestDialog />
+          <VacationRequestDialog 
+            trigger={
+              <Button size="sm" className="hidden sm:flex">
+                Novo Pedido
+              </Button>
+            }
+          />
 
           {/* Theme Toggle */}
           <ThemeToggle />
 
           {/* Notifications */}
           <NotificationsDropdown />
-
-          {/* Mobile User Avatar */}
-          <button className="md:hidden w-9 h-9 rounded-full bg-gradient-warm flex items-center justify-center text-white font-semibold text-sm">
-            MC
-          </button>
         </div>
       </div>
     </header>

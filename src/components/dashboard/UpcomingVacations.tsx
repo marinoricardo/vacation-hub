@@ -1,6 +1,4 @@
-import { CalendarDays, ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 
 const upcomingVacations = [
   {
@@ -49,18 +47,12 @@ export function UpcomingVacations() {
   return (
     <div className="bg-card rounded-xl border shadow-card">
       <div className="flex items-center justify-between p-6 border-b">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <CalendarDays className="w-5 h-5 text-primary" />
-          </div>
-          <div>
-            <h3 className="font-display font-semibold text-foreground">Próximas Férias</h3>
-            <p className="text-sm text-muted-foreground">Equipa de Janeiro - Fevereiro</p>
-          </div>
+        <div>
+          <h3 className="font-display font-semibold text-foreground">Próximas Férias</h3>
+          <p className="text-sm text-muted-foreground">Janeiro - Fevereiro</p>
         </div>
-        <button className="text-sm text-primary font-medium hover:underline flex items-center gap-1">
-          Ver todas
-          <ChevronRight className="w-4 h-4" />
+        <button className="text-sm text-primary font-medium hover:underline">
+          Ver todas →
         </button>
       </div>
       
@@ -68,12 +60,12 @@ export function UpcomingVacations() {
         {upcomingVacations.map((vacation) => (
           <div 
             key={vacation.id} 
-            className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors gap-4"
+            className="flex items-center justify-between p-4 hover:bg-muted/30 transition-colors gap-4"
           >
             <div className="flex items-center gap-3">
               <Avatar className="w-10 h-10">
                 <AvatarImage src={vacation.avatar} />
-                <AvatarFallback className="bg-primary text-white text-sm font-medium">
+                <AvatarFallback className="bg-muted text-foreground text-sm font-medium">
                   {vacation.initials}
                 </AvatarFallback>
               </Avatar>
@@ -82,14 +74,11 @@ export function UpcomingVacations() {
                 <p className="text-sm text-muted-foreground">{vacation.department}</p>
               </div>
             </div>
-            <div className="text-right flex flex-col items-end gap-2">
+            <div className="text-right">
               <p className="font-medium text-foreground">{vacation.dates}</p>
-              <div className="flex items-center gap-2">
-                <Badge className="text-xs">{vacation.days} dias</Badge>
-                <Badge variant={vacation.status === "approved" ? "secondary" : "destructive"} className="text-xs">
-                  {vacation.status === "approved" ? "Aprovado" : "Pendente"}
-                </Badge>
-              </div>
+              <p className="text-sm text-muted-foreground">
+                {vacation.days} dias · {vacation.status === "approved" ? "Aprovado" : "Pendente"}
+              </p>
             </div>
           </div>
         ))}

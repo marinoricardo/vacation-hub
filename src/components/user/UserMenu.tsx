@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { User, Settings, LogOut, HelpCircle, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,7 +45,7 @@ export function UserMenu({ collapsed = false }: UserMenuProps) {
             }`}
           >
             <Avatar className="w-10 h-10">
-              <AvatarFallback className="bg-gradient-warm text-white font-semibold text-sm">
+              <AvatarFallback className="bg-muted text-foreground font-semibold text-sm">
                 MC
               </AvatarFallback>
             </Avatar>
@@ -71,19 +70,16 @@ export function UserMenu({ collapsed = false }: UserMenuProps) {
 
           <div className="py-1">
             <DropdownMenuItem asChild>
-              <Link to="/configuracoes" className="flex items-center gap-2 cursor-pointer">
-                <User className="w-4 h-4" />
+              <Link to="/configuracoes" className="cursor-pointer">
                 Meu Perfil
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link to="/configuracoes" className="flex items-center gap-2 cursor-pointer">
-                <Settings className="w-4 h-4" />
+              <Link to="/configuracoes" className="cursor-pointer">
                 Configurações
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-              <HelpCircle className="w-4 h-4" />
+            <DropdownMenuItem className="cursor-pointer">
               Ajuda e Suporte
             </DropdownMenuItem>
           </div>
@@ -91,10 +87,9 @@ export function UserMenu({ collapsed = false }: UserMenuProps) {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem
-            className="flex items-center gap-2 text-destructive focus:text-destructive cursor-pointer"
+            className="text-destructive focus:text-destructive cursor-pointer"
             onClick={() => setShowLogoutDialog(true)}
           >
-            <LogOut className="w-4 h-4" />
             Terminar Sessão
           </DropdownMenuItem>
         </DropdownMenuContent>
