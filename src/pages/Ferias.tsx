@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { VacationRequestDialog } from "@/components/vacation/VacationRequestDialog";
@@ -57,8 +58,8 @@ export default function Ferias() {
         subtitle="Gerir pedidos e histórico" 
       />
       
-      <div className="p-6 space-y-6 animate-fade-in">
-        {/* Balance Cards - Minimalist */}
+      <PageTransition>
+      <div className="p-4 md:p-6 space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -174,7 +175,7 @@ export default function Ferias() {
           </div>
         </motion.div>
       </div>
-
+      </PageTransition>
       <ConfirmDialog
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}

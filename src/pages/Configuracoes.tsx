@@ -1,5 +1,6 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,8 +27,8 @@ export default function Configuracoes() {
         title="Configurações" 
         subtitle="Gerir conta e preferências" 
       />
-      
-      <div className="p-6 animate-fade-in">
+      <PageTransition>
+      <div className="p-4 md:p-6">
         <Tabs defaultValue="profile" className="space-y-6">
           <TabsList className="bg-muted/50 p-1 flex-wrap h-auto">
             <TabsTrigger value="profile" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
@@ -304,6 +305,7 @@ export default function Configuracoes() {
           </TabsContent>
         </Tabs>
       </div>
+      </PageTransition>
     </AppLayout>
   );
 }
