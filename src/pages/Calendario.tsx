@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Filter, Download, PalmtreeIcon, X, Check, Eye } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -86,8 +87,8 @@ export default function Calendario() {
         title="Calendário" 
         subtitle="Visualize as férias da equipa" 
       />
-      
-      <div className="p-6 space-y-6 animate-fade-in">
+      <PageTransition>
+      <div className="p-4 md:p-6 space-y-6">
         {/* Calendar Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
@@ -313,8 +314,7 @@ export default function Calendario() {
           </div>
         </div>
       </div>
-
-      {/* Day Details Dialog */}
+      </PageTransition>
       <Dialog open={dayDetailsOpen} onOpenChange={setDayDetailsOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>

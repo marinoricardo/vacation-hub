@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { AppSidebar } from "./AppSidebar";
+import { MobileBottomNav } from "./MobileBottomNav";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 interface AppLayoutProps {
@@ -8,19 +10,28 @@ interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <div className="min-h-screen bg-background">
-      <AppSidebar 
-        collapsed={sidebarCollapsed} 
-        onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} 
-      />
+      {/* Desktop sidebar */}
+      {!isMobile && (
+        <AppSidebar 
+          collapsed={sidebarCollapsed} 
+          onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} 
+        />
+      )}
+      
       <main className={cn(
         "min-h-screen transition-all duration-300",
-        sidebarCollapsed ? "ml-20" : "ml-64"
+        !isMobile && (sidebarCollapsed ? "ml-20" : "ml-64"),
+        isMobile && "pb-14"
       )}>
         {children}
       </main>
+
+      {/* Mobile bottom nav */}
+      {isMobile && <MobileBottomNav />}
     </div>
   );
 }

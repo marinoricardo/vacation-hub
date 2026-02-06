@@ -1,5 +1,6 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { QuickActions } from "@/components/dashboard/QuickActions";
 import { UpcomingVacations } from "@/components/dashboard/UpcomingVacations";
@@ -18,8 +19,8 @@ export default function Dashboard() {
         subtitle="Bem-vinda de volta, Maria" 
       />
       
-      <div className="p-6 space-y-6 animate-fade-in">
-        {/* Stats Grid */}
+      <PageTransition>
+      <div className="p-4 md:p-6 space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children">
           <StatCard
             title="Dias Disponíveis"
@@ -140,6 +141,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      </PageTransition>
     </AppLayout>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -205,8 +206,8 @@ export default function Pedidos() {
         title="Gestão de Pedidos" 
         subtitle="Aprovar e gerir pedidos de férias" 
       />
-      
-      <div className="p-6 space-y-6 animate-fade-in">
+      <PageTransition>
+      <div className="p-4 md:p-6 space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <motion.div 
@@ -484,7 +485,7 @@ export default function Pedidos() {
           </TabsContent>
         </Tabs>
       </div>
-
+      </PageTransition>
       <ConfirmDialog
         open={confirmDialog.open && confirmDialog.type === "approve"}
         onOpenChange={(open) => setConfirmDialog({ ...confirmDialog, open })}

@@ -1,5 +1,6 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
@@ -70,8 +71,8 @@ export default function Historico() {
         title="Histórico" 
         subtitle="Consultar histórico de férias" 
       />
-      
-      <div className="p-6 space-y-6 animate-fade-in">
+      <PageTransition>
+      <div className="p-4 md:p-6 space-y-6">
         {/* Actions Bar */}
         <div className="flex flex-col sm:flex-row gap-4 justify-between">
           <div className="relative flex-1 max-w-md">
@@ -184,6 +185,7 @@ export default function Historico() {
           </Button>
         </div>
       </div>
+      </PageTransition>
     </AppLayout>
   );
 }
