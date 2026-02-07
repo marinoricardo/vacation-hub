@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PalmtreeIcon, Mail, Lock, User, Building2, ArrowRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
+import { GoogleLogo } from "@/components/ui/GoogleLogo";
+import { toast } from "sonner";
 
 const features = [
   "Gestão centralizada de férias",
@@ -23,8 +25,15 @@ export default function CriarConta() {
       setStep(2);
     } else {
       setIsLoading(true);
-      setTimeout(() => setIsLoading(false), 2000);
+      setTimeout(() => {
+        setIsLoading(false);
+        toast.success("Conta criada com sucesso!");
+      }, 2000);
     }
+  };
+
+  const handleGoogleSignup = () => {
+    toast.info("A redirecionar para o Google...");
   };
 
   return (
@@ -73,6 +82,31 @@ export default function CriarConta() {
               }
             </p>
           </div>
+
+          {/* Google Button - only on step 1 */}
+          {step === 1 && (
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full h-12 gap-3 text-base font-medium mb-6 hover:bg-muted/50"
+                onClick={handleGoogleSignup}
+                disabled={isLoading}
+              >
+                <GoogleLogo />
+                Registar com Google
+              </Button>
+
+              <div className="relative mb-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-3 text-muted-foreground">ou registe com email</span>
+                </div>
+              </div>
+            </>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">

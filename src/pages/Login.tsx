@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PalmtreeIcon, Mail, Lock, ArrowRight, Building2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { showLoadingThenSuccessRedirect } from "@/lib/alerts";
+import { GoogleLogo } from "@/components/ui/GoogleLogo";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,22 @@ export default function Login() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    setIsLoading(true);
+    setTimeout(async () => {
+      try {
+        await showLoadingThenSuccessRedirect(
+          navigate,
+          "/dashboard",
+          { title: "Bem-vindo", text: "Sessão iniciada com Google!" },
+          1600
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    }, 500);
   };
 
   return (
@@ -49,6 +66,28 @@ export default function Login() {
             <p className="text-muted-foreground">
               Inicie sessão para gerir as suas férias
             </p>
+          </div>
+
+          {/* Google Button */}
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full h-12 gap-3 text-base font-medium mb-6 hover:bg-muted/50"
+            onClick={handleGoogleLogin}
+            disabled={isLoading}
+          >
+            <GoogleLogo />
+            Continuar com Google
+          </Button>
+
+          {/* Divider */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-border" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-3 text-muted-foreground">ou entre com email</span>
+            </div>
           </div>
 
           {/* Form */}
@@ -111,7 +150,7 @@ export default function Login() {
           </form>
 
           {/* Divider */}
-          <div className="relative my-8">
+          <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-border" />
             </div>
