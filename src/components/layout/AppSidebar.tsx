@@ -1,25 +1,49 @@
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, LayoutDashboard, Palmtree, CalendarDays, Clock, FileText, Users, Settings } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { cn } from "@/lib/utils";
 import { UserMenu } from "@/components/user/UserMenu";
+import type { LucideIcon } from "lucide-react";
 
 interface AppSidebarProps {
   collapsed?: boolean;
   onToggle?: () => void;
 }
 
-const navigation = [
-  { name: "Dashboard", href: "/dashboard" },
-  { name: "Minhas Férias", href: "/ferias" },
-  { name: "Calendário", href: "/calendario" },
-  { name: "Histórico", href: "/historico" },
-  { name: "Pedidos", href: "/pedidos" },
+interface NavItem {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+}
+
+const navigation: NavItem[] = [
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Minhas Férias", href: "/ferias", icon: Palmtree },
+  { name: "Calendário", href: "/calendario", icon: CalendarDays },
+  { name: "Histórico", href: "/historico", icon: Clock },
+  { name: "Pedidos", href: "/pedidos", icon: FileText },
 ];
 
-const adminNavigation = [
-  { name: "Equipa", href: "/equipa" },
-  { name: "Configurações", href: "/configuracoes" },
+const adminNavigation: NavItem[] = [
+  { name: "Equipa", href: "/equipa", icon: Users },
+  { name: "Configurações", href: "/configuracoes", icon: Settings },
 ];
+
+function NavItem({ item, collapsed }: { item: NavItem; collapsed: boolean }) {
+  const Icon = item.icon;
+  return (
+    <NavLink
+      to={item.href}
+      className={cn(
+        "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all",
+        collapsed && "justify-center px-2"
+      )}
+      activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
+    >
+      <Icon className="w-[18px] h-[18px] shrink-0" />
+      {!collapsed && <span className="text-sm">{item.name}</span>}
+    </NavLink>
+  );
+}
 
 export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
   return (
@@ -58,23 +82,9 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
               Menu
             </span>
           )}
-          <div className="mt-2 space-y-1">
+          <div className="mt-2 space-y-0.5">
             {navigation.map((item) => (
-              <NavLink
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  "flex items-center px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all",
-                  collapsed && "justify-center"
-                )}
-                activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
-              >
-                {collapsed ? (
-                  <span className="text-sm font-medium">{item.name.charAt(0)}</span>
-                ) : (
-                  <span>{item.name}</span>
-                )}
-              </NavLink>
+              <NavItem key={item.name} item={item} collapsed={collapsed} />
             ))}
           </div>
         </div>
@@ -85,23 +95,9 @@ export function AppSidebar({ collapsed = false, onToggle }: AppSidebarProps) {
               Admin
             </span>
           )}
-          <div className="mt-2 space-y-1">
+          <div className="mt-2 space-y-0.5">
             {adminNavigation.map((item) => (
-              <NavLink
-                key={item.name}
-                to={item.href}
-                className={cn(
-                  "flex items-center px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all",
-                  collapsed && "justify-center"
-                )}
-                activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
-              >
-                {collapsed ? (
-                  <span className="text-sm font-medium">{item.name.charAt(0)}</span>
-                ) : (
-                  <span>{item.name}</span>
-                )}
-              </NavLink>
+              <NavItem key={item.name} item={item} collapsed={collapsed} />
             ))}
           </div>
         </div>
