@@ -41,6 +41,8 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
   const [type, setType] = useState<string>("vacation");
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [startDateOpen, setStartDateOpen] = useState(false);
+  const [endDateOpen, setEndDateOpen] = useState(false);
 
   const calculatedDays =
     startDate && endDate ? differenceInDays(endDate, startDate) + 1 : 0;
@@ -97,7 +99,7 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
             {/* Start Date */}
             <div className="space-y-2">
               <Label>Data de início</Label>
-              <Popover>
+              <Popover open={startDateOpen} onOpenChange={setStartDateOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -122,6 +124,7 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
                       if (date && (!endDate || endDate < date)) {
                         setEndDate(date);
                       }
+                      setStartDateOpen(false);
                     }}
                     disabled={(date) => date < new Date()}
                     initialFocus
@@ -134,7 +137,7 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
             {/* End Date */}
             <div className="space-y-2">
               <Label>Data de fim</Label>
-              <Popover>
+              <Popover open={endDateOpen} onOpenChange={setEndDateOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -154,7 +157,10 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
                   <Calendar
                     mode="single"
                     selected={endDate}
-                    onSelect={setEndDate}
+                    onSelect={(date) => {
+                      setEndDate(date);
+                      setEndDateOpen(false);
+                    }}
                     disabled={(date) =>
                       date < (startDate || new Date()) ||
                       date < new Date()
@@ -175,10 +181,10 @@ export function VacationRequestDialog({ trigger }: VacationRequestDialogProps) {
                 <SelectValue placeholder="Selecionar tipo" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="vacation">🌴 Férias</SelectItem>
-                <SelectItem value="personal">👤 Dia pessoal</SelectItem>
-                <SelectItem value="medical">🏥 Consulta médica</SelectItem>
-                <SelectItem value="family">👨‍👩‍👧 Assunto familiar</SelectItem>
+                <SelectItem value="vacation">Férias</SelectItem>
+                <SelectItem value="personal">Dia pessoal</SelectItem>
+                <SelectItem value="medical">Consulta médica</SelectItem>
+                <SelectItem value="family">Assunto familiar</SelectItem>
               </SelectContent>
             </Select>
           </div>

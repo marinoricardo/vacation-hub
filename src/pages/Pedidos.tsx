@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, X, Clock, MessageSquare, ChevronDown, ChevronUp, Search, Filter } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { RejectDialog } from "@/components/ui/RejectDialog";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -170,7 +171,7 @@ export default function Pedidos() {
     setConfirmDialog({ open: false, type: "approve", requestId: null });
   };
 
-  const handleReject = () => {
+  const handleReject = (comment: string) => {
     if (confirmDialog.requestId) {
       const request = pendingRequests.find(r => r.id === confirmDialog.requestId);
       if (request) {
@@ -180,10 +181,12 @@ export default function Pedidos() {
           status: "rejected",
           processedAt: new Date().toLocaleDateString('pt-PT', { day: '2-digit', month: 'short', year: 'numeric' })
         }, ...prev]);
-        toast.success(`Pedido de ${request.name} rejeitado.`);
+        toast.success(`Pedido de ${request.name} rejeitado.`, {
+          description: `Motivo: ${comment}`,
+        });
       }
     }
-    setConfirmDialog({ open: false, type: "reject", requestId: null });
+    setConfirmDialog({ open: false, type: "approve", requestId: null });
   };
 
   const toggleSort = (field: SortField) => {
@@ -496,15 +499,10 @@ export default function Pedidos() {
         onConfirm={handleApprove}
       />
 
-      <ConfirmDialog
+      <RejectDialog
         open={confirmDialog.open && confirmDialog.type === "reject"}
         onOpenChange={(open) => setConfirmDialog({ ...confirmDialog, open })}
-        title="Rejeitar pedido?"
-        description="Tens a certeza de que queres rejeitar este pedido de férias?"
-        confirmText="Sim, rejeitar"
-        cancelText="Cancelar"
         onConfirm={handleReject}
-        variant="destructive"
       />
     </AppLayout>
   );
